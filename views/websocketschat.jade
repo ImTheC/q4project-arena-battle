@@ -25,10 +25,14 @@ block content
         #messages
 
     .row
-      .col-sm
+      .col-sm-6
         h3 Web Sockets Chat Test
         input(type='text' id='textmsg' name='textmsg')
         input(type='submit' id='sendbutton' name='sendbutton' value='Send')
+
+      .col-sm-6
+        h3 Send Message To:
+        #usersListSelect
 
   script(src="/socket.io/socket.io.js")
   script(type="text/javascript" src="js/websocketschat.js")

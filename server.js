@@ -92,6 +92,14 @@ function sendJustTheNames ( wholeList ) {
 	return justTheNames;
 };
 
+function getClientId ( userName ) {
+	for ( let id in connectedSockets ) {
+		if ( connectedSockets[id] === userName ) {
+			return id;
+		}
+	}
+};
+
 io.on('connection', function (client) {
 	console.log('***Client connected:', client.id);
 
@@ -109,8 +117,13 @@ io.on('connection', function (client) {
 	});
 
 	client.on('messages', function(data) {
+
+		if ( data.sendTo === "all" ) {
+		 io.emit('broad', data);
+	 } else {
 		 client.emit('broad', data);
-		 client.broadcast.emit('broad', data);
+		 client.broadcast.to(getClientId(data.sendTo)).emit('broad', data);
+	 }
 		 console.log(connectedSockets);
 	});
 

@@ -78,3 +78,7 @@ form button[type="submit"] {
 #messages p {
 margin-left: 10px;
 }
+
+.whisper {
+	color: blue;
+}

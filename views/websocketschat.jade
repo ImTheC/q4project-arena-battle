@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  .container
+    if messages.error
+      div.text-danger(role='alert')
+        for error in messages.error
+          div= error.msg
+    if messages.success
+      div.text-success(role='alert')
+        for success in messages.success
+          div= success.msg
+    if messages.info
+      div.text-info(role='alert')
+        for info in messages.info
+          div= info.msg
+
+    .row
+      .col-sm-6
+        h3 Users Online:
+        #usersList
+
+      .col-sm-6
+        h3 Messages:
+        #messages
+
+    .row
+      .col-sm
+        h3 Web Sockets Chat Test
+        input(type='text' id='textmsg' name='textmsg')
+        input(type='submit' id='sendbutton' name='sendbutton' value='Send')
+
+  script(src="/socket.io/socket.io.js")
+  script(type="text/javascript" src="js/websocketschat.js")

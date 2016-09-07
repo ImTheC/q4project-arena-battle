@@ -47,6 +47,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 app.get('/', HomeController.index);
 app.get('/websocketschat', userController.ensureAuthenticated, HomeController.websocketschat)
+app.get('/currentgamebuild', HomeController.currentgamebuild)
 app.get('/contact', contactController.contactGet);
 app.post('/contact', contactController.contactPost);
 app.get('/account', userController.ensureAuthenticated, userController.accountGet);

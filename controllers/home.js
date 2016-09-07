@@ -13,3 +13,9 @@ exports.websocketschat = function(req, res) {
     title: 'Websockets Chat Demo'
   });
 };
+
+exports.currentgamebuild = function(req, res) {
+  res.render('currentgamebuild', {
+    title: 'Current Game Build'
+  });
+};

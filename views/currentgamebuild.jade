@@ -1,1 +1,21 @@
-include ../public/build/index.html
+extends layout
+
+block content
+  .container
+    if messages.error
+      div.text-danger(role='alert')
+        for error in messages.error
+          div= error.msg
+    if messages.success
+      div.text-success(role='alert')
+        for success in messages.success
+          div= success.msg
+    if messages.info
+      div.text-info(role='alert')
+        for info in messages.info
+          div= info.msg
+
+  .container
+    .row
+      .col-lg-12
+        include ../build/currentbuild.html

@@ -15,7 +15,5 @@ exports.websocketschat = function(req, res) {
 };
 
 exports.currentgamebuild = function(req, res) {
-  res.render('currentgamebuild', {
-    title: 'Current Game Build'
-  });
+  res.redirect('build/index.html');
 };

@@ -3,12 +3,12 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable('users', function(table) {
       table.increments();
       table.string('name');
-			table.string('username').unique();
+      table.string('username').unique();
       table.string('email').unique();
-			table.bigInteger('score');
-			table.integer('wins');
-			table.integer('losses');
-			table.integer('level');
+      table.bigInteger('score');
+      table.integer('wins');
+      table.integer('losses');
+      table.integer('level');
       table.string('password');
       table.string('passwordResetToken');
       table.dateTime('passwordResetExpires');

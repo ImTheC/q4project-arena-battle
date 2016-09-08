@@ -17,3 +17,7 @@ exports.websocketschat = function(req, res) {
 exports.currentgamebuild = function(req, res) {
   res.redirect('build/index.html');
 };
+
+exports.currentgamebuild1 = function(req, res) {
+  res.redirect('build1/index.html');
+};

@@ -31,6 +31,7 @@ exports.loginGet = function(req, res) {
  * POST /login
  */
 exports.loginPost = function(req, res, next) {
+
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('email', 'Email cannot be blank').notEmpty();
   req.assert('password', 'Password cannot be blank').notEmpty();

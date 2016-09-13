@@ -10,6 +10,8 @@ var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
 var dotenv = require('dotenv');
 var passport = require('passport');
+var expressJWT = require('express-jwt');
+var jwt = require('jsonwebtoken');
 
 // Load environment variables from .env file
 dotenv.load();
@@ -18,6 +20,7 @@ dotenv.load();
 var HomeController = require('./controllers/home');
 var userController = require('./controllers/user');
 var contactController = require('./controllers/contact');
+var apiController = require('./controllers/api')
 
 // Passport OAuth strategies
 require('./config/passport');
@@ -70,6 +73,14 @@ app.get('/auth/google', passport.authenticate('google', { scope: 'profile email'
 app.get('/auth/google/callback', passport.authenticate('google', { successRedirect: '/', failureRedirect: '/login' }));
 app.get('/auth/twitter', passport.authenticate('twitter'));
 app.get('/auth/twitter/callback', passport.authenticate('twitter', { successRedirect: '/', failureRedirect: '/login' }));
+
+
+// API for Unity Project
+app.post('/api/login', apiController.loginPost);
+app.post('/api/signup', apiController.signupPost);
+
+app.use(expressJWT({ secret: process.env.JWTSECRET }));
+app.put('/api/updatescore', apiController.scorePut);
 
 // Production error handler
 if (app.get('env') === 'production') {

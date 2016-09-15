@@ -19,27 +19,6 @@ exports.checkForErr = function(err, req, res, next) {
 		}
 };
 
-
-
-
-
-// function IssueJWT (user, next) {
-//   user.attributes.jwtid = jwt.sign({'id': user.id}, process.env.JWTSECRET);
-// 	next();
-// };
-
-// /**
-//  * GET /login
-//  */
-// exports.loginGet = function(req, res) {
-//   if (req.user) {
-//     return res.redirect('/');
-//   }
-//   res.render('account/login', {
-//     title: 'Log in'
-//   });
-// };
-
 /**
  * POST /login
  */
@@ -86,18 +65,6 @@ exports.logout = function(req, res) {
   // res.redirect('/');
 };
 
-// /**
-//  * GET /signup
-//  */
-// exports.signupGet = function(req, res) {
-//   if (req.user) {
-//     return res.redirect('/');
-//   }
-//   res.render('account/signup', {
-//     title: 'Sign up'
-//   });
-// };
-
 /**
  * POST /signup
  */
@@ -114,8 +81,6 @@ exports.signupPost = function(req, res, next) {
 		info.error = "error";
 		res.send(errors); // on error
 		return;
-    // req.flash('error', errors);
-    // return res.redirect('/signup');
   }
 
   new User({
@@ -127,7 +92,6 @@ exports.signupPost = function(req, res, next) {
         req.logIn(user, function(err) {
 					user.attributes.jwtid = jwt.sign({'id': user.id}, process.env.JWTSECRET);
 					res.send(user);
-          // res.redirect('/');
         });
     })
     .catch(function(err) {
@@ -136,8 +100,6 @@ exports.signupPost = function(req, res, next) {
 				info.msg = '{ "msg": "The email address you have entered is already associated with another account." }';
 				res.send(errors); // on error
 				return;
-        // req.flash('error', { msg: 'The email address you have entered is already associated with another account.' });
-        // return res.redirect('/signup');
       }
     });
 };
@@ -153,7 +115,6 @@ exports.getLtScores = function(req, res) {
     	users.limit(10);
   	}).fetchAll({columns:['username','lifegamescore']})
     .then(function(users) {
-			console.log(users);
 			res.send(users);
     }).catch(function(err) {
 			err.error = "error";
@@ -174,7 +135,6 @@ exports.getHScores = function(req, res) {
     	users.limit(10);
   	}).fetchAll({columns:['username','bestgamescore']})
     .then(function(users) {
-			console.log(users);
 			res.send(users);
     }).catch(function(err) {
 			err.error = "error";

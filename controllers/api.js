@@ -9,20 +9,19 @@ var jwt = require('jsonwebtoken');
 /**
  * Login required middleware
  */
-exports.ensureAuthenticated = function(req, res, next) {
-//   // if (req.isAuthenticated()) {
-//   //   next();
-//   // } else {
-//   //   res.send('{"error": "error", "msg": "You are not authorized. Please try logging in."}')
-//   // }
-// console.log("HERE");
-// 	expressJWT({ secret: process.env.JWTSECRET }), function (err, req, res, next) {
-// 	  if (err.name === 'UnauthorizedError') {
-// 	    res.send('{"error": "error", "msg": "No authorization token was found"}');
-// 	  }
-// 		next();
-// 	};
+exports.ensureAuthenticated = expressJWT({ secret: process.env.JWTSECRET });
+
+exports.checkForErr = function(err, req, res, next) {
+	  if (err.name === 'UnauthorizedError') {
+	    res.send('{"error": "error", "msg": "No authorization token was found"}');
+	  } else {
+			next();
+		}
 };
+
+
+
+
 
 // function IssueJWT (user, next) {
 //   user.attributes.jwtid = jwt.sign({'id': user.id}, process.env.JWTSECRET);

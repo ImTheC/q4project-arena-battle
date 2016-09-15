@@ -20,7 +20,7 @@ dotenv.load();
 var HomeController = require('./controllers/home');
 var userController = require('./controllers/user');
 var contactController = require('./controllers/contact');
-var apiController = require('./controllers/api')
+var apiController = require('./controllers/api');
 
 // Passport OAuth strategies
 require('./config/passport');
@@ -79,6 +79,7 @@ app.get('/auth/twitter/callback', passport.authenticate('twitter', { successRedi
 app.post('/api/login', apiController.loginPost);
 app.post('/api/signup', apiController.signupPost);
 app.get('/api/getltscores', apiController.getLtScores);
+app.get('/api/gethscores',  apiController.getHScores);
 
 // app.use(expressJWT({ secret: process.env.JWTSECRET }), function (err, req, res, next) {
 //   if (err.name === 'UnauthorizedError') {
@@ -87,8 +88,6 @@ app.get('/api/getltscores', apiController.getLtScores);
 // 		next();
 // 	}
 // });
-
-app.get('/api/gethscores',  apiController.getHScores);
 
 app.put('/api/updatescore', apiController.ensureAuthenticated, apiController.checkForErr,  apiController.scorePut);
 
@@ -131,7 +130,7 @@ io.on('connection', function (client) {
 		connectedCount++;
 		// client.emit just sends a message back to this one socket
 		client.emit('respond', connectedSockets[client.id]);
-		io.emit('usersList', sendJustTheNames(connectedSockets))
+		io.emit('usersList', sendJustTheNames(connectedSockets));
 
 	});
 

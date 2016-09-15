@@ -10,12 +10,24 @@ var jwt = require('jsonwebtoken');
  * Login required middleware
  */
 exports.ensureAuthenticated = function(req, res, next) {
-  if (req.isAuthenticated()) {
-    next();
-  } else {
-    res.send('{"error": "error", "msg": "You are not authorized. Please try logging in."}')
-  }
+//   // if (req.isAuthenticated()) {
+//   //   next();
+//   // } else {
+//   //   res.send('{"error": "error", "msg": "You are not authorized. Please try logging in."}')
+//   // }
+// console.log("HERE");
+// 	expressJWT({ secret: process.env.JWTSECRET }), function (err, req, res, next) {
+// 	  if (err.name === 'UnauthorizedError') {
+// 	    res.send('{"error": "error", "msg": "No authorization token was found"}');
+// 	  }
+// 		next();
+// 	};
 };
+
+// function IssueJWT (user, next) {
+//   user.attributes.jwtid = jwt.sign({'id': user.id}, process.env.JWTSECRET);
+// 	next();
+// };
 
 // /**
 //  * GET /login
@@ -114,6 +126,7 @@ exports.signupPost = function(req, res, next) {
   }).save()
     .then(function(user) {
         req.logIn(user, function(err) {
+					user.attributes.jwtid = jwt.sign({'id': user.id}, process.env.JWTSECRET);
 					res.send(user);
           // res.redirect('/');
         });
@@ -130,17 +143,49 @@ exports.signupPost = function(req, res, next) {
     });
 };
 
+/**
+ * GET /getltscores
+ */
+exports.getLtScores = function(req, res) {
+
+	new User()
+		.orderBy('lifegamescore', 'desc')
+		.query(function (users) {
+    	users.limit(10);
+  	}).fetchAll({columns:['username','lifegamescore']})
+    .then(function(users) {
+			console.log(users);
+			res.send(users);
+    }).catch(function(err) {
+			err.error = "error";
+			res.send(err);
+			return;
+    });
+};
+
 // /**
-//  * GET /account
+//  * GET /gethscores
 //  */
-// exports.accountGet = function(req, res) {
-//   res.render('account/profile', {
-//     title: 'My Account'
-//   });
-// };
+// exports.getHScores = function(req, res) {
+exports.getHScores = function(req, res) {
+
+	new User()
+		.orderBy('bestgamescore', 'desc')
+		.query(function (users) {
+    	users.limit(10);
+  	}).fetchAll({columns:['username','bestgamescore']})
+    .then(function(users) {
+			console.log(users);
+			res.send(users);
+    }).catch(function(err) {
+			err.error = "error";
+			res.send(err);
+			return;
+    });
+};
 
 /**
- * PUT /account
+ * PUT /updatescore
  * Update profile information OR change password.
  */
 exports.scorePut = function(req, res, next) {
@@ -148,22 +193,23 @@ exports.scorePut = function(req, res, next) {
   var errors = req.validationErrors();
 
   if (errors) {
-		info.error = "error";
+		errors.error = "error";
 		res.send(errors); // on error
 		return;
   }
 
   var user = new User({ id: req.user.id });
   user.save({
-      bestgamescore: req.body.bestgamescore,
-      highestlevel: req.body.highestlevel,
-      lifegamescore: req.body.lifegamescore,
+      bestgamescore: parseInt(req.body.bestgamescore),
+      highestlevel: parseInt(req.body.highestlevel),
+      lifegamescore: parseInt(req.body.lifegamescore)
     }, { patch: true }).then(function(user) {
-
     res.send(user);
   }).catch(function(err) {
-		err.error = "error";
-		res.send(err);
+		// if (err) {
+		// 	err.error = "error";
+		// 	res.send(err);
+		// }
   });
 };
 

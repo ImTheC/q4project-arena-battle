@@ -78,8 +78,16 @@ app.get('/auth/twitter/callback', passport.authenticate('twitter', { successRedi
 // API for Unity Project
 app.post('/api/login', apiController.loginPost);
 app.post('/api/signup', apiController.signupPost);
+app.get('/api/getltscores', apiController.getLtScores);
+app.get('/api/gethscores', apiController.getHScores);
 
-app.use(expressJWT({ secret: process.env.JWTSECRET }));
+app.use(expressJWT({ secret: process.env.JWTSECRET }), function (err, req, res, next) {
+  if (err.name === 'UnauthorizedError') {
+    res.send('{"error": "error", "msg": "No authorization token was found"}');
+  }
+	next();
+});
+
 app.put('/api/updatescore', apiController.scorePut);
 
 // Production error handler

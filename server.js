@@ -95,7 +95,7 @@ app.use(expressJWT({ secret: process.env.JWTSECRET }), function (err, req, res, 
 
 app.put('/api/updatescore', apiController.scorePut);
 
-app.get('/:params', HomeController.homelifetime);
+app.get('/*', HomeController.homelifetime);
 
 // Production error handler
 if (app.get('env') === 'production') {

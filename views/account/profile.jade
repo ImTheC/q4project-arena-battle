@@ -1,68 +1,115 @@
 extends ../layout
 
 block content
-  .container
-    if messages.success
-      div.text-success
-        for success in messages.success
-          div= success.msg
-    if messages.error
-      div.text-danger
-        for error in messages.error
-          div= error.msg
+	.container
+		if messages.success
+			div.text-success
+				for success in messages.success
+					div= success.msg
+		if messages.error
+			div.text-danger
+				for error in messages.error
+					div= error.msg
 
-    h4 Profile Information
+	.section
+		.row
+			.col.s4
+				.card
+					.card-content.black-text
+						h5.title.left-align Lifetime Score
+						h5.center-align #{user.lifegamescore}
 
-    form(method='POST', action='/account?_method=PUT')
-      label(for='email') Email
-      input(type='email', name='email', id='email', value=user.email)
+			.col.s4
+				.card
+					.card-content.black-text
+						h5.title.left-align Personal High Score
+						h5.center-align #{user.bestgamescore}
 
-      label(for='name') Name
-      input(type='text', name='name', id='name', value=user.name)
+			.col.s4
+				.card
+					.card-content.black-text
+						h5.title.left-align Highest Level
+						h5.center-align #{user.highestlevel}
 
-      label Gender
-      input(type='radio', checked=(user.gender == 'male'), name='gender', id='male', value='male', data-toggle='radio')
-      label(for='male') Male
-      input(type='radio', checked=(user.gender == 'female'), name='gender', id='female', value='female', data-toggle='radio')
-      label(for='female') Female
 
-      label(for='location') Location
-      input(type='text', name='location', id='location', value=user.location)
+		.row
+			.col.s12.l6
+				.card
+					.card-content.black-text
+						h4 Profile Information
 
-      label(for='website') Website
-      input(type='text', name='website', id='website', value=user.website)
+						form(method='POST', action='/account?_method=PUT')
 
-      label Gravatar
-      img.gravatar(src=user.gravatar, width='100', height='100')
+							label(for='username') Username
+							input(type='text', name='username', id='username', value=user.username)
 
-      br
-      button(type='submit') Update Profile
+							label(for='email') Email
+							input(type='email', name='email', id='email', value=user.email)
 
-    h4 Change Password
+							label(for='name') Name
+							input(type='text', name='name', id='name', value=user.name)
 
-    form(method='POST', action='/account?_method=PUT')
-      label(for='password') New Password
-      input(type='password', name='password', id='password')
-      label(for='confirm') Confirm Password
-      input(type='password', name='confirm', id='confirm')
-      br
-      button(type='submit') Change Password
+							//- label Gender
+							//- input(type='radio', checked=(user.gender == 'male'), name='gender', id='male', value='male', data-toggle='radio')
+							//- label(for='male') Male
+							//- input(type='radio', checked=(user.gender == 'female'), name='gender', id='female', value='female', data-toggle='radio')
+							//- label(for='female') Female
+							//-
+							//- label(for='location') Location
+							//- input(type='text', name='location', id='location', value=user.location)
+							//-
+							//- label(for='website') Website
+							//- input(type='text', name='website', id='website', value=user.website)
+							//- label Gravatar
+							//- img.gravatar(src=user.gravatar, width='100', height='100')
 
-    h4 Linked Accounts
-    if user.facebook
-      p: a.text-danger(href='/unlink/facebook') Unlink your Facebook account
-    else
-      p: a(href='/auth/facebook') Link your Facebook account
-    if user.twitter
-      p: a.text-danger(href='/unlink/twitter') Unlink your Twitter account
-    else
-      p: a(href='/auth/twitter') Link your Twitter account
-    if user.google
-      p: a.text-danger(href='/unlink/google') Unlink your Google account
-    else
-      p: a(href='/auth/google') Link your Google account
+							br
+							button.waves-effect.waves-light.btn.light-blue(type='submit') Update Profile
 
-    h4 Delete Account
-    form(method='POST', action='/account?_method=DELETE')
-      div You can delete your account, but keep in mind this action is irreversible.
-      button(type='submit') Delete my account
+			.col.s12.l6
+				.card
+					.card-content.black-text
+						h4 Change Password
+						br
+						br
+						br
+						br
+
+						form(method='POST', action='/account?_method=PUT')
+							label(for='password') New Password
+							input(type='password', name='password', id='password')
+							label(for='confirm') Confirm Password
+							input(type='password', name='confirm', id='confirm')
+							br
+							button.waves-effect.waves-light.btn.light-blue(type='submit') Change Password
+
+						//- h4 Linked Accounts
+						//- if user.facebook
+						//- 	p: a.text-danger(href='/unlink/facebook') Unlink your Facebook account
+						//- else
+						//- 	p: a(href='/auth/facebook') Link your Facebook account
+						//- if user.twitter
+						//- 	p: a.text-danger(href='/unlink/twitter') Unlink your Twitter account
+						//- else
+						//- 	p: a(href='/auth/twitter') Link your Twitter account
+						//- if user.google
+						//- 	p: a.text-danger(href='/unlink/google') Unlink your Google account
+						//- else
+						//- 	p: a(href='/auth/google') Link your Google account
+		.row
+			.col.s12
+				.card
+					.card-content.black-text
+						h4 Delete Account
+							h5 You can delete your account, but keep in mind this action is irreversible.
+							button.waves-effect.waves-light.btn.light-blue.modal-trigger(href='#delete') Delete my account
+
+		// Modal Structure
+		#delete.modal
+			.modal-content.black-text
+				h4 Are you sure you want to delete your account?
+				hr
+				form(method='POST', action='/account?_method=DELETE')
+					h5 Last chance to change your mind. Once you click delete, there's no turning back!
+					button.waves-effect.waves-light.btn.red(type='submit') Delete my account
+					a.right.modal-action.modal-close.waves-effect.waves-light.btn.btn-large.light-blue(href='#!') No!! Nevermind!!

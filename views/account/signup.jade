@@ -11,29 +11,32 @@ block content
 				for error in messages.error
 					div= error.msg
 
-		h4 Create an account
+		.section
+		.card
+			.card-content.black-text
+				h4 Create an account
 
-		form(method='POST')
-			label(for='name') Name
-			input(type='text', name='name', id='name', placeholder='Name', autofocus)
-			label(for='name') Username
-			input(type='text', name='username', id='username', placeholder='Username')
-			label(for='email') Email
-			input(type='email', name='email', id='email', placeholder='Email')
-			label(for='password') Password
-			input(type='password', name='password', id='password', placeholder='Password')
-			button(type='submit') Create an account
-			//- p By signing up, you agree to the <a href="/">Terms of Service</a>.
-			//- 
-			//- hr
-			//-
-			//- a(href='/auth/facebook') Sign in with Facebook
-			//- br
-			//- a(href='/auth/twitter') Sign in with Twitter
-			//- br
-			//- a(href='/auth/google') Sign in with Google
-			//- br
+				form(method='POST')
+					label(for='name') Name
+					input(type='text', name='name', id='name', placeholder='Name', autofocus)
+					label(for='name') Username
+					input(type='text', name='username', id='username', placeholder='Username')
+					label(for='email') Email
+					input(type='email', name='email', id='email', placeholder='Email')
+					label(for='password') Password
+					input(type='password', name='password', id='password', placeholder='Password')
+					button.waves-effect.waves-light.btn.light-blue(type='submit') Create an account
+					//- p By signing up, you agree to the <a href="/">Terms of Service</a>.
+					//-
+					//- hr
+					//-
+					//- a(href='/auth/facebook') Sign in with Facebook
+					//- br
+					//- a(href='/auth/twitter') Sign in with Twitter
+					//- br
+					//- a(href='/auth/google') Sign in with Google
+					//- br
 
-		p Already have an account?
-			a(href='/login')
-				strong	Log in
+				p Already have an account?
+					a(href='/login')
+						strong	Log in

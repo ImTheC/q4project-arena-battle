@@ -1,0 +1,48 @@
+extends layout
+
+block content
+	.container
+		if messages.error
+			div.text-danger(role='alert')
+				for error in messages.error
+					div= error.msg
+		if messages.success
+			div.text-success(role='alert')
+				for success in messages.success
+					div= success.msg
+		if messages.info
+			div.text-info(role='alert')
+				for info in messages.info
+					div= info.msg
+	.section
+	.container
+		.row
+			.col.s12
+				.card
+					.card-content.black-text
+						h1.title Leaderboard
+						ul.list-inline
+							li: a.waves-effect.waves-light.btn.light-blue(href="/") Lifetime Scores
+							li: a.waves-effect.waves-light.btn.light-blue(href="/homehighscores") High Scores
+							li: a.waves-effect.waves-light.btn.light-blue(href="/homehighlevels") Highest Level
+
+	.section
+	.container
+		.row
+			.col.s12
+				.card
+					.card-content.black-text
+						table.striped.responsive-table
+							thead
+								tr
+									th.flow-text.title(data-field='lifegamescore') Best High Scores
+									th.flow-text.title(data-field='#')
+									th.flow-text.title(data-field='username') Username
+									th.flow-text.title(data-field='lifegamescore') Score
+							tbody
+								each player, index in players
+									tr
+										td.
+										td.flow-text.center-align= index+1 + "."
+										td.flow-text= player.attributes.username
+										td.flow-text= player.attributes.bestgamescore

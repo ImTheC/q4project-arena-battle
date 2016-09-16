@@ -48,12 +48,16 @@ app.use(function(req, res, next) {
 });
 app.use(express.static(path.join(__dirname, '/public')));
 
-app.get('/', HomeController.index);
-app.get('/websocketschat', userController.ensureAuthenticated, HomeController.websocketschat);
-app.get('/currentgamebuild', HomeController.currentgamebuild);
-app.get('/currentgamebuild1', HomeController.currentgamebuild1);
-app.get('/contact', contactController.contactGet);
-app.post('/contact', contactController.contactPost);
+app.get('/', HomeController.homelifetime); //homelifetime scores
+app.get('/homehighscores', HomeController.homehighscores);
+app.get('/homehighlevels', HomeController.homehighlevels);
+
+app.get('/game', HomeController.game);
+// app.get('/websocketschat', userController.ensureAuthenticated, HomeController.websocketschat);
+// app.get('/currentgamebuild', HomeController.currentgamebuild);
+// app.get('/currentgamebuild1', HomeController.currentgamebuild1);
+// app.get('/contact', contactController.contactGet);
+// app.post('/contact', contactController.contactPost);
 app.get('/account', userController.ensureAuthenticated, userController.accountGet);
 app.put('/account', userController.ensureAuthenticated, userController.accountPut);
 app.delete('/account', userController.ensureAuthenticated, userController.accountDelete);

@@ -32,10 +32,9 @@ exports.loginGet = function(req, res) {
  */
 exports.loginPost = function(req, res, next) {
 
-  req.assert('email', 'Email is not valid').isEmail();
-  req.assert('email', 'Email cannot be blank').notEmpty();
+  req.assert('username', 'Username cannot be blank').notEmpty();
   req.assert('password', 'Password cannot be blank').notEmpty();
-  req.sanitize('email').normalizeEmail({ remove_dots: false });
+  // req.sanitize('email').normalizeEmail({ remove_dots: false });
 
   var errors = req.validationErrors();
 
@@ -50,7 +49,7 @@ exports.loginPost = function(req, res, next) {
       return res.redirect('/login')
     }
     req.logIn(user, function(err) {
-      res.redirect('/');
+      res.redirect('/account');
     });
   })(req, res, next);
 };
@@ -79,7 +78,7 @@ exports.signupGet = function(req, res) {
  * POST /signup
  */
 exports.signupPost = function(req, res, next) {
-  req.assert('name', 'Name cannot be blank').notEmpty();
+  req.assert('username', 'Username cannot be blank').notEmpty();
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('email', 'Email cannot be blank').notEmpty();
   req.assert('password', 'Password must be at least 4 characters long').len(4);
@@ -94,6 +93,7 @@ exports.signupPost = function(req, res, next) {
 
   new User({
     name: req.body.name,
+		username: req.body.username,
     email: req.body.email,
     password: req.body.password
   }).save()
@@ -115,7 +115,7 @@ exports.signupPost = function(req, res, next) {
  */
 exports.accountGet = function(req, res) {
   res.render('account/profile', {
-    title: 'My Account'
+    title: 'My Arena Battle Account'
   });
 };
 
@@ -130,6 +130,7 @@ exports.accountPut = function(req, res, next) {
   } else {
     req.assert('email', 'Email is not valid').isEmail();
     req.assert('email', 'Email cannot be blank').notEmpty();
+		req.assert('username', 'Username cannot be blank').notEmpty();
     req.sanitize('email').normalizeEmail({ remove_dots: false });
   }
 
@@ -147,12 +148,10 @@ exports.accountPut = function(req, res, next) {
     user.save({
       email: req.body.email,
       name: req.body.name,
-      gender: req.body.gender,
-      location: req.body.location,
-      website: req.body.website
+			username: req.body.username
     }, { patch: true });
   }
-  user.then(function(user) {
+  user.fetch().then(function(user) {
     if ('password' in req.body) {
       req.flash('success', { msg: 'Your password has been changed.' });
     } else {
@@ -267,9 +266,9 @@ exports.forgotPost = function(req, res, next) {
       });
       var mailOptions = {
         to: user.email,
-        from: 'support@yourdomain.com',
-        subject: '✔ Reset your password on Mega Boilerplate',
-        text: 'You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n' +
+        from: 'no-reply@imthec.com',
+        subject: 'Reset your Arena Battle password.',
+        text: 'You are receiving this email because you (or someone else) has requested the reset of the password for your account.\n\n' +
         'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
         'http://' + req.headers.host + '/reset/' + token + '\n\n' +
         'If you did not request this, please ignore this email and your password will remain unchanged.\n'
@@ -346,9 +345,9 @@ exports.resetPost = function(req, res, next) {
         }
       });
       var mailOptions = {
-        from: 'support@yourdomain.com',
+        from: 'no-reply@imthec.com',
         to: user.email,
-        subject: 'Your Mega Boilerplate password has been changed',
+        subject: 'Your Arena Battle password has been changed',
         text: 'Hello,\n\n' +
         'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
       };

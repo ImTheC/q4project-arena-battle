@@ -1,5 +1,5 @@
 (function() {
 
-
+    $('.modal-trigger').leanModal();
 
 })();

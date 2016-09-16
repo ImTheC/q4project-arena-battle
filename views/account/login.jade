@@ -11,27 +11,30 @@ block content
 				for error in messages.error
 					div= error.msg
 
-		h4 Log In
+		.section
+		.card
+			.card-content.black-text
+				h4 Log In
 
-		form(method='POST')
-			label(for='email') Email
-			input(type='email', name='email', id='email', placeholder='Email', autofocus)
-			label(for='password') Password
-			input(type='password', name='password', id='password', placeholder='Password')
-			p
-				a(href='/forgot')
-					strong Forgot your password?
-			button(type='submit') Log in
+				form(method='POST')
+					label(for='username') Username
+					input(type='text', name='username', id='username', placeholder='username', autofocus)
+					label(for='password') Password
+					input(type='password', name='password', id='password', placeholder='Password')
+					p
+						a(href='/forgot')
+							strong Forgot your password?
+					button.waves-effect.waves-light.btn.light-blue(type='submit') Log in
 
-			hr
-			//- 
-			//- a(href='/auth/facebook') Sign in with Facebook
-			//- br
-			//- a(href='/auth/twitter') Sign in with Twitter
-			//- br
-			//- a(href='/auth/google') Sign in with Google
-			//- br
+					hr
+				//-
+				//- a(href='/auth/facebook') Sign in with Facebook
+				//- br
+				//- a(href='/auth/twitter') Sign in with Twitter
+				//- br
+				//- a(href='/auth/google') Sign in with Google
+				//- br
 
-		p Don't have an account?
-			a(href='/signup')
-				strong	Sign up
+				p Don't have an account?
+					a(href='/signup')
+						strong	Sign up

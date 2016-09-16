@@ -1,23 +1,34 @@
-.container
-  ul.list-inline
-    li
-      a(href='/') Home
-    //- li
-    //-   a(href='/contact') Contact
-    ul.list-inline
-      if user
-        li
-          if user.picture
-            img.avatar(src=user.picture)
-          else
-            img.avatar(src=user.gravatar)
-          | <span id='userName'> #{user.email || user.id} </span>
-        li
-          a(href='/account') My Account
-        li
-          a(href='/logout') Logout
-      else
-        li
-          a(href='/login') Log in
-        li
-          a(href='/signup') Sign up
+.nav
+	.nav-wrapper.black.white-text
+		ul.list-inline
+			li
+				a.waves-effect.waves-light.btn.light-blue(href='/') Leaderboards
+			ul.list-inline
+				if user
+					li
+						if user.picture
+							img.avatar(src=user.picture)
+						else
+							img.avatar(src=user.gravatar)
+						| <span id='userName'> #{user.username || user.email} </span>
+					li
+						a.waves-effect.waves-light.btn.light-blue(href='/account') My Account
+					li
+						a.waves-effect.waves-light.btn.light-blue(href='/logout') Logout
+				else
+					li
+						a.waves-effect.waves-light.btn.light-blue(href='/login') Account Settings
+				li
+					a.waves-effect.waves-light.btn.light-blue.tooltipped(data-position="bottom" data-delay="0" data-tooltip="Be patient. May take a moment or three to launch." href="/game") Launch Game
+				//- li
+				//-	 a(href='/signup') Sign up
+//- /*nav
+//-	 .nav-wrapper
+//-		 a.brand-logo.right(href='#') Arena Battle: Space
+//-		 ul
+//-			 li
+//-				 a(href='sass.html') Sass
+//-			 li
+//-				 a(href='badges.html') Components
+//-			 li
+//-				 a(href='collapsible.html') JavaScript*/

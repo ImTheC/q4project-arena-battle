@@ -85,15 +85,17 @@ app.post('/api/signup', apiController.signupPost);
 app.get('/api/getltscores', apiController.getLtScores);
 app.get('/api/gethscores',  apiController.getHScores);
 
-// app.use(expressJWT({ secret: process.env.JWTSECRET }), function (err, req, res, next) {
-//   if (err.name === 'UnauthorizedError') {
-//     res.send('{"error": "error", "msg": "No authorization token was found"}');
-//   } else {
-// 		next();
-// 	}
-// });
+app.use(expressJWT({ secret: process.env.JWTSECRET }), function (err, req, res, next) {
+  if (err.name === 'UnauthorizedError') {
+    res.send('{"error": "error", "msg": "No authorization token was found"}');
+  } else {
+		next();
+	}
+});
 
-app.put('/api/updatescore', apiController.ensureAuthenticated, apiController.checkForErr,  apiController.scorePut);
+app.put('/api/updatescore', apiController.scorePut);
+
+app.put('/:params'), HomeController.homelifetime);
 
 // Production error handler
 if (app.get('env') === 'production') {

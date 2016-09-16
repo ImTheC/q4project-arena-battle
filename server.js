@@ -93,7 +93,13 @@ app.get('/api/gethscores',  apiController.getHScores);
 // 	}
 // });
 
-app.put('/api/updatescore', apiController.ensureAuthenticated, apiController.checkForErr,  apiController.scorePut);
+app.put('/api/updatescore', expressJWT({ secret: process.env.JWTSECRET }), function (err, req, res, next) {
+  if (err.name === 'UnauthorizedError') {
+    res.send('{"error": "error", "msg": "No authorization token was found"}');
+  } else {
+		apiController.scorePut;
+	}
+});
 
 // Production error handler
 if (app.get('env') === 'production') {

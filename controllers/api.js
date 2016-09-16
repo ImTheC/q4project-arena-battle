@@ -160,6 +160,11 @@ exports.scorePut = function(req, res, next) {
   }
 
   var user = new User({ id: req.user.id });
+	// console.log("ID:", req.user.id);
+	// console.log("bestgamescore:", parseInt(req.body.bestgamescore));
+	// console.log("highestlevel:", parseInt(req.body.highestlevel));
+	// console.log("lifegamescore:", parseInt(req.body.lifegamescore));
+
   user.save({
       bestgamescore: parseInt(req.body.bestgamescore),
       highestlevel: parseInt(req.body.highestlevel),

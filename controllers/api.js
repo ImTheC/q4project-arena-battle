@@ -169,10 +169,15 @@ exports.scorePut = function(req, res, next) {
 	// console.log("lifegamescore:", parseInt(req.body.lifegamescore));
 
   user.save({
-      bestgamescore: req.body.bestgamescore,
-      highestlevel: req.body.highestlevel,
-      lifegamescore: req.body.lifegamescore
-    }, { patch: true });
+      bestgamescore: parseInt(req.body.bestgamescore),
+      highestlevel: parseInt(req.body.highestlevel),
+      lifegamescore: parseInt(req.body.lifegamescore)
+    }, { patch: true }).catch(function(err) {
+			if (err) {
+				err.error = "error";
+				res.send(err);
+			}
+	  });
 
   user.fetch().then(function(user) {
     res.send(user);

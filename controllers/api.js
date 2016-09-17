@@ -172,14 +172,7 @@ exports.scorePut = function(req, res, next) {
       bestgamescore: parseInt(req.body.bestgamescore),
       highestlevel: parseInt(req.body.highestlevel),
       lifegamescore: parseInt(req.body.lifegamescore)
-    }, { patch: true }).catch(function(err) {
-			if (err) {
-				err.error = "error";
-				res.send(err);
-			}
-	  });
-
-  user.fetch().then(function(user) {
+    }, { patch: true }).then(function(user) {
     res.send(user);
   }).catch(function(err) {
 		if (err) {

@@ -161,6 +161,7 @@ exports.scorePut = function(req, res, next) {
 		res.send(errors); // on error
 		return;
   }
+	console.log("#### req", req);
 	console.log("#### req.body", req.body);
 	console.log("#### req.user", req.user);
 	console.log("#### ID: ", req.user.id);

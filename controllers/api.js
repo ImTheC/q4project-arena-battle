@@ -161,10 +161,12 @@ exports.scorePut = function(req, res, next) {
 		res.send(errors); // on error
 		return;
   }
+	console.log("#### req.body", req.body);
+	console.log("#### req.user", req.user);
 	console.log("#### ID: ", req.user.id);
-	console.log("#### bestgamescore: ", parseInt(req.body.bestgamescore));
-	console.log("#### highestlevel: ", parseInt(req.body.highestlevel));
-	console.log("#### lifegamescore: ", parseInt(req.body.lifegamescore));
+	console.log("#### bestgamescore parseInt'd: ", parseInt(req.body.bestgamescore));
+	console.log("#### highestlevel parseInt'd: ", parseInt(req.body.highestlevel));
+	console.log("#### lifegamescore parseInt'd: ", parseInt(req.body.lifegamescore));
   var user = new User({ id: req.user.id });
 	// console.log("ID:", req.user.id);
 	// console.log("bestgamescore:", parseInt(req.body.bestgamescore));

@@ -42,16 +42,16 @@ exports.loginPost = function(req, res, next) {
 	    .then(function(user) {
 	      if (!user) {
 	        res.send('{ "error": "error", "msg": "The username " + username + " is not associated with any account. " + "Double-check your username and try again." }');
-	      }
-
-	      user.comparePassword(req.body.password, function(err, isMatch) {
-	        if (!isMatch) {
-	          res.send('{ "error": "error", "msg": "Invalid username or password." }');
-	        }
-
-					user.attributes.jwtid = jwt.sign({'id': user.id}, process.env.JWTSECRET);
-					res.send(user);
-	      });
+	      } else {
+		      user.comparePassword(req.body.password, function(err, isMatch) {
+		        if (!isMatch) {
+		          res.send('{ "error": "error", "msg": "Invalid username or password." }');
+		        } else {
+							user.attributes.jwtid = jwt.sign({'id': user.id}, process.env.JWTSECRET);
+							res.send(user);
+						}
+			    });
+				}
 	    });
 
     // req.logIn(user, function(err) {

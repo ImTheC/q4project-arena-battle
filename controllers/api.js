@@ -161,7 +161,7 @@ exports.scorePut = function(req, res, next) {
 		res.send(errors); // on error
 		return;
   }
-
+	console.log("#### ID: ", req.user.id);
   var user = new User({ id: req.user.id });
 	// console.log("ID:", req.user.id);
 	// console.log("bestgamescore:", parseInt(req.body.bestgamescore));

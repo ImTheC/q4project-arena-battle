@@ -4,12 +4,10 @@ var User = require('../models/User');
  * GET /
  */
 exports.homelifetime = function(req, res) {
-
 	new User()
 		.orderBy('lifegamescore', 'desc')
 		.fetchAll({columns:['username','lifegamescore']})
 		.then(function(users) {
-			console.log(users.models);
 			res.render('homelifetime', {
 		    title: 'Leaderboard - Arena Battle: Space',
 				players: users.models
@@ -28,7 +26,6 @@ exports.homehighscores = function(req, res) {
 		.orderBy('bestgamescore', 'desc')
 		.fetchAll({columns:['username','bestgamescore']})
 		.then(function(users) {
-			console.log(users.models);
 			res.render('homehighscores', {
 		    title: 'Leaderboard - Arena Battle: Space',
 				players: users.models
@@ -47,7 +44,6 @@ exports.homehighlevels = function(req, res) {
 		.orderBy('highestlevel', 'desc')
 		.fetchAll({columns:['username','highestlevel']})
 		.then(function(users) {
-			console.log(users.models);
 			res.render('homehighlevels', {
 		    title: 'Leaderboard - Arena Battle: Space',
 				players: users.models

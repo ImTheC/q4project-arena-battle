@@ -15,6 +15,10 @@ html {
 	font-weight: bold;
 }
 
+.bump-right {
+	margin-left: 20px;
+}
+
 @font-face {
     font-family: herculanum;
     src: url('/css/Herculanum.ttf');

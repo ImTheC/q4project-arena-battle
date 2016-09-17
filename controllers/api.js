@@ -6,20 +6,6 @@ var User = require('../models/User');
 var expressJWT = require('express-jwt');
 var jwt = require('jsonwebtoken');
 
-/**
- * Login required middleware
- */
-exports.ensureAuthenticated = expressJWT({ secret: process.env.JWTSECRET });
-
-exports.checkForErr = function(err, req, res, next) {
-	  if (err.name === 'UnauthorizedError') {
-			console.log("Err in checkForErr");
-	    res.send('{"error": "error", "msg": "No authorization token was found"}');
-	  } else {
-			console.log("No Err in checkForErr");
-			next();
-		}
-};
 
 /**
  * POST /login
@@ -150,7 +136,6 @@ exports.getHScores = function(req, res) {
  * Update profile information OR change password.
  */
 exports.scorePut = function(req, res, next) {
-
   var errors = req.validationErrors();
 
   if (errors) {

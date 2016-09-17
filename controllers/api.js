@@ -28,20 +28,38 @@ exports.loginPost = function(req, res, next) {
     // return res.redirect('/login');
   }
 
-  passport.authenticate('local', function(err, user, info) {
-    if (!user) {
-			info.error = "error";
-			res.send(info); // on error
-			return;
-      // req.flash('error', info);
-      // return res.redirect('/login')
-    }
-    req.logIn(user, function(err) {
-			user.attributes.jwtid = jwt.sign({'id': user.id}, process.env.JWTSECRET);
-			res.send(user);
+  // passport.authenticate('local', function(err, user, info) {
+  //   if (!user) {
+	// 		info.error = "error";
+	// 		res.send(info); // on error
+	// 		return;
+  //     // req.flash('error', info);
+  //     // return res.redirect('/login')
+  //   }
+
+		new User({ username: req.body.username })
+	    .fetch()
+	    .then(function(user) {
+	      if (!user) {
+	        res.send('{ "error": "error", "msg": "The username " + username + " is not associated with any account. " + "Double-check your username and try again." }');
+	      }
+
+	      user.comparePassword(req.body.password, function(err, isMatch) {
+	        if (!isMatch) {
+	          res.send('{ "error": "error", "msg": "Invalid username or password." }');
+	        }
+
+					user.attributes.jwtid = jwt.sign({'id': user.id}, process.env.JWTSECRET);
+					res.send(user);
+	      });
+	    });
+
+    // req.logIn(user, function(err) {
+		// 	user.attributes.jwtid = jwt.sign({'id': user.id}, process.env.JWTSECRET);
+		// 	res.send(user);
       // res.redirect('/');
-    });
-  })(req, res, next);
+    // });
+  // })(req, res, next);
 };
 
 /**
@@ -151,9 +169,9 @@ exports.scorePut = function(req, res, next) {
 	// console.log("lifegamescore:", parseInt(req.body.lifegamescore));
 
   user.save({
-      bestgamescore: parseInt(req.body.bestgamescore),
-      highestlevel: parseInt(req.body.highestlevel),
-      lifegamescore: parseInt(req.body.lifegamescore)
+      bestgamescore: req.body.bestgamescore,
+      highestlevel: req.body.highestlevel,
+      lifegamescore: req.body.lifegamescore
     }, { patch: true });
 
   user.fetch().then(function(user) {

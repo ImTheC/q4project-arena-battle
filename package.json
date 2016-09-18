@@ -4,7 +4,7 @@
   "description": "Battle Arena: Space",
   "scripts": {
     "start": "node server.js",
-		"test": "NODE_ENV=test mocha"
+    "test": "NODE_ENV=test mocha"
   },
   "dependencies": {
     "async": "^1.5.2",
@@ -24,6 +24,7 @@
     "knex": "^0.10.0",
     "method-override": "^2.3.5",
     "morgan": "^1.7.0",
+    "multer": "^1.2.0",
     "nodemailer": "^2.3.0",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.0",

@@ -87,9 +87,12 @@ app.get('/api/gethscores',  apiController.getHScores);
 
 // app.put('/api/updatescore', apiController.ensureAuthenticated, apiController.scorePut);
 
-app.put('/api/updatescore', expressJWT({ secret: process.env.JWTSECRET }), function (req, res, next) {
+app.put('/api/updatescore', function (req, res, next) {
+	console.log("req.user:", req.user);
+	console.log("req.body:", req.body);
+	console.log("req.header:", req.header);
+}, expressJWT({ secret: process.env.JWTSECRET }), function (req, res, next) {
 	console.log("after JWT, in function");
-	console.log(req.session);
   if (req.user.id) {
     next();
   } else {

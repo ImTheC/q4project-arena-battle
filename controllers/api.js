@@ -8,6 +8,17 @@ var jwt = require('jsonwebtoken');
 
 
 /**
+ * Login required middleware
+ */
+exports.ensureAuthenticated = function(req, res, next) {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.send('{"error": "error", "msg": "Unable to authenticate."}');
+  }
+};
+
+/**
  * POST /login
  */
 exports.loginPost = function(req, res, next) {
@@ -151,7 +162,7 @@ exports.getHScores = function(req, res) {
 
 /**
  * PUT /updatescore
- * Update profile information OR change password.
+ * Update score information.
  */
 exports.scorePut = function(req, res, next) {
   var errors = req.validationErrors();
@@ -161,18 +172,9 @@ exports.scorePut = function(req, res, next) {
 		res.send(errors); // on error
 		return;
   }
-	console.log("#### req", req);
+
 	console.log("#### req.body", req.body);
-	console.log("#### req.user", req.user);
-	console.log("#### ID: ", req.user.id);
-	console.log("#### bestgamescore parseInt'd: ", parseInt(req.body.bestgamescore));
-	console.log("#### highestlevel parseInt'd: ", parseInt(req.body.highestlevel));
-	console.log("#### lifegamescore parseInt'd: ", parseInt(req.body.lifegamescore));
   var user = new User({ id: req.user.id });
-	// console.log("ID:", req.user.id);
-	// console.log("bestgamescore:", parseInt(req.body.bestgamescore));
-	// console.log("highestlevel:", parseInt(req.body.highestlevel));
-	// console.log("lifegamescore:", parseInt(req.body.lifegamescore));
 
   user.save({
       bestgamescore: parseInt(req.body.bestgamescore),

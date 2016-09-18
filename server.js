@@ -12,8 +12,6 @@ var dotenv = require('dotenv');
 var passport = require('passport');
 var expressJWT = require('express-jwt');
 var jwt = require('jsonwebtoken');
-var multer  = require('multer');
-var upload = multer();
 
 // Load environment variables from .env file
 dotenv.load();
@@ -87,16 +85,17 @@ app.post('/api/signup', apiController.signupPost);
 app.get('/api/getltscores', apiController.getLtScores);
 app.get('/api/gethscores',  apiController.getHScores);
 
+app.put('/api/updatescore', apiController.ensureAuthenticated, apiController.scorePut);
 
-app.put('/api/updatescore', upload.array(), expressJWT({ secret: process.env.JWTSECRET }), (function (err, req, res, next) {
-	console.log("after JWT, in function");
-  if (err.name === 'UnauthorizedError') {
-    res.send('{"error": "error", "msg": "No authorization token was found"}');
-  } else {
-		console.log("No error");
-		next();
-	}
-}), apiController.scorePut);
+// app.put('/api/updatescore', upload.array(), expressJWT({ secret: process.env.JWTSECRET }), (function (err, req, res, next) {
+// 	console.log("after JWT, in function");
+//   if (err.name === 'UnauthorizedError') {
+//     res.send('{"error": "error", "msg": "No authorization token was found"}');
+//   } else {
+// 		console.log("No error");
+// 		next();
+// 	}
+// }), apiController.scorePut);
 
 
 // Production error handler

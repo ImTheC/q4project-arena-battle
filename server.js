@@ -35,7 +35,7 @@ app.set('port', process.env.PORT || 3000);
 app.use(compression());
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
 app.use(methodOverride('_method'));
 app.use(session({ secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: true }));

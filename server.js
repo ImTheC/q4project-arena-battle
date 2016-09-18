@@ -85,17 +85,18 @@ app.post('/api/signup', apiController.signupPost);
 app.get('/api/getltscores', apiController.getLtScores);
 app.get('/api/gethscores',  apiController.getHScores);
 
-app.put('/api/updatescore', apiController.ensureAuthenticated, apiController.scorePut);
+// app.put('/api/updatescore', apiController.ensureAuthenticated, apiController.scorePut);
 
-// app.put('/api/updatescore', upload.array(), expressJWT({ secret: process.env.JWTSECRET }), (function (err, req, res, next) {
-// 	console.log("after JWT, in function");
-//   if (err.name === 'UnauthorizedError') {
-//     res.send('{"error": "error", "msg": "No authorization token was found"}');
-//   } else {
-// 		console.log("No error");
-// 		next();
-// 	}
-// }), apiController.scorePut);
+app.put('/api/updatescore', expressJWT({ secret: process.env.JWTSECRET }), function (req, res, next) {
+	console.log("after JWT, in function");
+	console.log(req.session);
+  if (req.user.id) {
+    next();
+  } else {
+		console.log("Error");
+		res.send('{"error": "error", "msg": "No authorization token was found"}');
+	}
+}, apiController.scorePut);
 
 
 // Production error handler

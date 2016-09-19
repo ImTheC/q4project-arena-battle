@@ -87,8 +87,7 @@ app.get('/api/gethscores',  apiController.getHScores);
 app.get('/api/logout', apiController.logout);
 
 app.put('/api/updatescore', function (req, res, next) {
-	console.log("req.body:", req.body);
-	console.log("req.headers:", req.headers);
+	console.log("### Life Score:", req.body.lifegamescore );
 	next();
 }, apiController.ensureAuthenticated, apiController.scorePut);
 

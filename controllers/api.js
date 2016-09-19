@@ -177,7 +177,7 @@ exports.scorePut = function(req, res, next) {
 		return;
   }
 
-	console.log("#### scorePut - req.body", req.body);
+	console.log("###### Life Score:", req.body.lifegamescore );
   var user = new User({ id: req.user.id });
 
   user.save({

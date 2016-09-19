@@ -39,14 +39,14 @@ exports.loginPost = function(req, res, next) {
     // return res.redirect('/login');
   }
 
-  // passport.authenticate('local', function(err, user, info) {
-  //   if (!user) {
-	// 		info.error = "error";
-	// 		res.send(info); // on error
-	// 		return;
-  //     // req.flash('error', info);
-  //     // return res.redirect('/login')
-  //   }
+  passport.authenticate('local', function(err, user, info) {
+    if (!user) {
+			info.error = "error";
+			res.send(info); // on error
+			return;
+      // req.flash('error', info);
+      // return res.redirect('/login')
+    }
 
 		new User({ username: req.body.username })
 	    .fetch()
@@ -65,12 +65,12 @@ exports.loginPost = function(req, res, next) {
 				}
 	    });
 
-    // req.logIn(user, function(err) {
-		// 	user.attributes.jwtid = jwt.sign({'id': user.id}, process.env.JWTSECRET);
-		// 	res.send(user);
-      // res.redirect('/');
-    // });
-  // })(req, res, next);
+    req.logIn(user, function(err) {
+			// user.attributes.jwtid = jwt.sign({'id': user.id}, process.env.JWTSECRET);
+			res.send(user);
+      res.redirect('/');
+    });
+  })(req, res, next);
 };
 
 /**

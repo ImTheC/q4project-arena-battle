@@ -85,23 +85,27 @@ app.post('/api/signup', apiController.signupPost);
 app.get('/api/getltscores', apiController.getLtScores);
 app.get('/api/gethscores',  apiController.getHScores);
 
-// app.put('/api/updatescore', apiController.ensureAuthenticated, apiController.scorePut);
-
 app.put('/api/updatescore', function (req, res, next) {
 	console.log("req.body:", req.body);
 	console.log("req.headers:", req.headers);
 	next();
-}, expressJWT({ secret: process.env.JWTSECRET }), function (req, res, next) {
-	console.log("#### after JWT, in function");
-	console.log("req.user:", req.user);
-	console.log("req.body:", req.body);
-  if (req.user.id) {
-    next();
-  } else {
-		console.log("Error");
-		res.send('{"error": "error", "msg": "No authorization token was found"}');
-	}
-}, apiController.scorePut);
+}, apiController.ensureAuthenticated, apiController.scorePut);
+
+// app.put('/api/updatescore', function (req, res, next) {
+// 	console.log("req.body:", req.body);
+// 	console.log("req.headers:", req.headers);
+// 	next();
+// }, expressJWT({ secret: process.env.JWTSECRET }), function (req, res, next) {
+// 	console.log("#### after JWT, in function");
+// 	console.log("req.user:", req.user);
+// 	console.log("req.body:", req.body);
+//   if (req.user.id) {
+//     next();
+//   } else {
+// 		console.log("Error");
+// 		res.send('{"error": "error", "msg": "No authorization token was found"}');
+// 	}
+// }, apiController.scorePut);
 
 
 // Production error handler

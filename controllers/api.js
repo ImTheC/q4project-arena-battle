@@ -173,7 +173,7 @@ exports.scorePut = function(req, res, next) {
 		return;
   }
 
-	console.log("#### req.body", req.body);
+	console.log("#### scorePut - req.body", req.body);
   var user = new User({ id: req.user.id });
 
   user.save({

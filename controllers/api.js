@@ -58,18 +58,22 @@ exports.loginPost = function(req, res, next) {
 		        if (!isMatch) {
 		          res.send('{ "error": "error", "msg": "Invalid username or password." }');
 		        } else {
-							user.attributes.jwtid = jwt.sign({'id': user.id}, process.env.JWTSECRET);
-							res.send(user);
+							req.logIn(user, function(err) {
+								user.attributes.jwtid = jwt.sign({'id': user.id}, process.env.JWTSECRET);
+								res.send(user);
+					    });
+							// user.attributes.jwtid = jwt.sign({'id': user.id}, process.env.JWTSECRET);
+							// res.send(user);
 						}
 			    });
 				}
 	    });
-
-    req.logIn(user, function(err) {
-			// user.attributes.jwtid = jwt.sign({'id': user.id}, process.env.JWTSECRET);
-			res.send(user);
-      res.redirect('/');
-    });
+		//
+    // req.logIn(user, function(err) {
+		// 	// user.attributes.jwtid = jwt.sign({'id': user.id}, process.env.JWTSECRET);
+		// 	res.send(user);
+    //   res.redirect('/');
+    // });
   })(req, res, next);
 };
 

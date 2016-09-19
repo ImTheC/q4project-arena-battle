@@ -84,6 +84,7 @@ app.post('/api/login', apiController.loginPost);
 app.post('/api/signup', apiController.signupPost);
 app.get('/api/getltscores', apiController.getLtScores);
 app.get('/api/gethscores',  apiController.getHScores);
+app.get('/api/logout', apiController.logout);
 
 app.put('/api/updatescore', function (req, res, next) {
 	console.log("req.body:", req.body);

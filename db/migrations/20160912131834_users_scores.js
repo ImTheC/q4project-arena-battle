@@ -23,5 +23,5 @@ exports.down = function(knex, Promise) {
       table.integer('level');
 			table.dropColumn('highestlevel');
 })
-  ])
+  ]);
 };

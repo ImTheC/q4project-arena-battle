@@ -6,6 +6,10 @@ html {
 	color: white;
 }
 
+.reg-font {
+	font-family: sans-serif;
+}
+
 .shrink {
   flex-shrink: 1;
 }

@@ -48,8 +48,8 @@ app.use(function(req, res, next) {
 });
 app.use(express.static(path.join(__dirname, '/public')));
 
-app.get('/', HomeController.homelifetime); //homelifetime scores
-app.get('/homehighscores', HomeController.homehighscores);
+app.get('/', HomeController.homehighscores); // single game high score page
+app.get('/homelifescores', HomeController.homelifetime);
 app.get('/homehighlevels', HomeController.homehighlevels);
 
 app.get('/game', HomeController.game);

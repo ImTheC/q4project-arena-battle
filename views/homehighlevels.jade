@@ -22,9 +22,9 @@ block content
 					.card-content.black-text
 						h1.title Leaderboard
 						ul.list-inline
-							li: a.waves-effect.waves-light.btn.light-blue(href="/") Lifetime Scores
-							li: a.waves-effect.waves-light.btn.light-blue(href="/homehighscores") High Scores
-							li: a.waves-effect.waves-light.btn.light-blue(href="/homehighlevels") Highest Level
+							li: a.waves-effect.waves-light.btn.light-blue(href="/#homehighscores") High Scores
+							li: a.waves-effect.waves-light.btn.light-blue(href="/homelifescores/#homelifescores") Lifetime Scores
+							li: a.waves-effect.waves-light.btn.light-blue.darken-4(href="/homehighlevels/#homehighlevels") Highest Level
 
 	.section
 	.container
@@ -32,7 +32,7 @@ block content
 			.col.s12
 				.card
 					.card-content.black-text
-						table.striped.responsive-table
+						table#homehighlevels.striped.responsive-table
 							thead
 								tr
 									th.flow-text.title(data-field='lifegamescore') Highest Levels

@@ -19,7 +19,13 @@ block content
 		.row
 			.col.s12
 				.card
-					.card-content.black-text
+					.card-content.black-text.hide-on-med-and-down
+						h1.title Leaderboard
+						ul.list-inline
+							li: a.waves-effect.waves-light.btn.light-blue(href="/#homehighscores") High Scores
+							li: a.waves-effect.waves-light.btn.light-blue.darken-4(href="/homelifescores/#homelifescores") Lifetime Scores
+							li: a.waves-effect.waves-light.btn.light-blue(href="/homehighlevels/#homehighlevels") Highest Level
+					.card-content.black-text.hide-on-large-only.center-align
 						h1.title Leaderboard
 						ul.list-inline
 							li: a.waves-effect.waves-light.btn.light-blue(href="/#homehighscores") High Scores

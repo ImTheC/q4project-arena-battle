@@ -1,36 +1,46 @@
 .nav
 	.nav-wrapper.black.white-text
-		ul.list-inline.bump-right
+		ul.list-inline.bump-right.hide-on-med-and-down
 			li
 				a.waves-effect.waves-light.btn.light-blue(href='/') Leaderboards
-			ul.list-inline
-				if user
-					li
-						if user.picture
-							img.avatar(src=user.picture)
-						else
-							img.avatar(src=user.gravatar)
-						| <span id='userName'> #{user.username || user.email} </span>
-					li
-						a.waves-effect.waves-light.btn.light-blue(href='/account') My Account
-					li
-						a.waves-effect.waves-light.btn.light-blue(href='/logout') Logout
-				else
-					li
-						a.waves-effect.waves-light.btn.light-blue(href='/login') Account Settings
+			if user
 				li
-					a.waves-effect.waves-light.btn.light-blue.tooltipped(data-position="bottom" data-delay="0" data-tooltip="Be patient. May take a moment or three to launch." href="/game") Launch Game
+					if user.picture
+						img.avatar(src=user.picture)
+					else
+						img.avatar(src=user.gravatar)
+					| <span id='userName'> #{user.username || user.email} </span>
 				li
-					a.waves-effect.waves-light.btn.light-blue(href='http://superuser.com/questions/836832/how-can-i-enable-webgl-in-my-browser' target='_blank') WebGL Issues?
-				//- li
-				//-	 a(href='/signup') Sign up
-//- /*nav
-//-	 .nav-wrapper
-//-		 a.brand-logo.right(href='#') Arena Battle: Space
-//-		 ul
-//-			 li
-//-				 a(href='sass.html') Sass
-//-			 li
-//-				 a(href='badges.html') Components
-//-			 li
-//-				 a(href='collapsible.html') JavaScript*/
+					a.waves-effect.waves-light.btn.light-blue(href='/account') My Account
+				li
+					a.waves-effect.waves-light.btn.light-blue(href='/logout') Logout
+			else
+				li
+					a.waves-effect.waves-light.btn.light-blue(href='/login') Account Settings
+			li
+				a.waves-effect.waves-light.btn.light-blue.tooltipped(data-position="bottom" data-delay="0" data-tooltip="Be patient. May take a moment or three to launch." href="/game") Launch Game
+			li
+				a.waves-effect.waves-light.btn.light-blue(href='http://superuser.com/questions/836832/how-can-i-enable-webgl-in-my-browser' target='_blank') WebGL Issues?
+		ul.list-inline.bump-right.hide-on-large-only.center-align
+			li
+				a.waves-effect.waves-light.btn.light-blue(href='/') Leaderboards
+			if user
+				li
+					if user.picture
+						img.avatar(src=user.picture)
+					else
+						img.avatar(src=user.gravatar)
+					| <span id='userName'> #{user.username || user.email} </span>
+				li
+					a.waves-effect.waves-light.btn.light-blue(href='/account') My Account
+				li
+					a.waves-effect.waves-light.btn.light-blue(href='/logout') Logout
+			else
+				li
+					a.waves-effect.waves-light.btn.light-blue(href='/login') Account Settings
+			li
+				a.waves-effect.waves-light.btn.light-blue.tooltipped(data-position="bottom" data-delay="0" data-tooltip="Be patient. May take a moment or three to launch." href="/game") Launch Game
+			li
+				a.waves-effect.waves-light.btn.light-blue(href='http://superuser.com/questions/836832/how-can-i-enable-webgl-in-my-browser' target='_blank') WebGL Issues?
+			//- li
+			//-	 a(href='/signup') Sign up

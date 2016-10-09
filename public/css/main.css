@@ -6,6 +6,11 @@ html {
 	color: white;
 }
 
+.img-header {
+	width: 75vw;
+	height: auto;
+}
+
 .reg-font {
 	font-family: sans-serif;
 }
@@ -15,12 +20,17 @@ html {
 }
 
 .title {
+	font-size: 2em;
 	text-decoration: underline;
 	font-weight: bold;
 }
 
 .bump-right {
 	margin-left: 20px;
+}
+
+.bump-down {
+	margin-bottom: 20px;
 }
 
 @font-face {
@@ -77,6 +87,7 @@ form button[type="submit"] {
 .list-inline > li {
   display: inline-block;
   padding: 0 5px;
+	margin-bottom: 10px;
 }
 
 .container {

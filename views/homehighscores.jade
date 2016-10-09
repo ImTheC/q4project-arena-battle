@@ -41,10 +41,10 @@ block content
 						table#homehighscores.striped.responsive-table
 							thead
 								tr
-									th.flow-text.title(data-field='lifegamescore') Best High Scores
-									th.flow-text.title(data-field='#')
-									th.flow-text.title(data-field='username') Username
-									th.flow-text.title(data-field='lifegamescore') Score
+									th.flow-text(data-field='lifegamescore') Best High Scores
+									th.flow-text(data-field='#')
+									th.flow-text(data-field='username') Username
+									th.flow-text(data-field='lifegamescore') Score
 							tbody
 								each player, index in players
 									tr

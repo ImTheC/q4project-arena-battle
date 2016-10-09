@@ -41,10 +41,10 @@ block content
 						table#homelifescores.striped.responsive-table
 							thead
 								tr
-									th.flow-text.title(data-field='lifegamescore') Lifetime Scores
-									th.flow-text.title(data-field='#')
-									th.flow-text.title(data-field='username') Username
-									th.flow-text.title(data-field='username') Score
+									th.flow-text(data-field='lifegamescore') Lifetime Scores
+									th.flow-text(data-field='#')
+									th.flow-text(data-field='username') Username
+									th.flow-text(data-field='username') Score
 							tbody
 								each player, index in players
 									tr
